@@ -53,7 +53,7 @@
                         }
                    ?>
                     <!-- form start -->
-                  <form  action="<?php $_SERVER['PHP_SELF'] ?>" method ="POST" autocomplete="off" enctype="multipart/form-data">
+                  <form  action="<?php $_SERVER['PHP_SELF'] ?>" method ="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <label>First Name</label>
                           <input type="text" name="fname" class="form-control" placeholder="First Name" required>

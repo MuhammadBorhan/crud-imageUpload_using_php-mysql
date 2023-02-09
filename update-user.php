@@ -10,11 +10,11 @@ if(isset($_POST['submit'])){
     $user = mysqli_real_escape_string($connection,$_POST['username']);
     $role = mysqli_real_escape_string($connection,$_POST['role']);
 
-    // move_uploaded_file($_FILES["image"]["tmp_name"],"upload/".$_FILES["image"]["name"]);
-    // $updateImg=$_FILES["image"]["name"];
+    move_uploaded_file($_FILES["image"]["tmp_name"],"upload/".$_FILES["image"]["name"]);
+    $updateImg=$_FILES["image"]["name"];
 
     $updateUser = "UPDATE user SET 
-    -- profile = '$updateImg',
+    profile='$updateImg',
     first_name = '$fname', 
     last_name = '$lname',
     username = '$user',
@@ -48,7 +48,7 @@ if(isset($_POST['submit'])){
 
             ?>
                   <!-- Form Start -->
-                  <form  action="<?php $_SERVER['PHP_SELF'] ?>" method ="POST">
+                  <form  action="<?php $_SERVER['PHP_SELF'] ?>" method ="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <input type="hidden" name="user_id"  class="form-control" value="<?php echo $row['user_id'] ?>" placeholder="" >
                       </div>
@@ -64,10 +64,11 @@ if(isset($_POST['submit'])){
                           <label>User Name</label>
                           <input type="text" name="username" class="form-control" value="<?php echo $row['username'] ?>" placeholder="" required>
                       </div>
-                      <!-- <div class="form-group">
+                      <div class="form-group">
                           <label>Image URL</label>
                           <input type="file" name="image" class="form-control" >
-                      </div> -->
+                      </div>
+                      
                       <div class="form-group">
                           <label>User Role</label>
                           <select class="form-control" name="role" value="<?php echo $row['role']; ?>">
