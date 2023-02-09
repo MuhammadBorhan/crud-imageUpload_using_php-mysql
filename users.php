@@ -24,10 +24,18 @@
 
         <?php 
             include "config.php";
-
             $serial=1;
+            $limit = 3;
 
-            $query = "SELECT * FROM user ORDER BY user_id";
+            if(isset($_GET['page'])){
+              $page_number = $_GET['page'];
+            }else{
+              $page_number = 1;
+            }
+              
+            $offset = ($page_number - 1) * $limit;
+
+            $query = "SELECT * FROM user ORDER BY user_id LIMIT $offset, $limit";
             $result = mysqli_query($connection,$query) or die("Failed");
             $count = mysqli_num_rows($result);
 
@@ -63,6 +71,37 @@
         <?php } ?>
         
                 </table>
+              
+            <?php 
+                include "config.php";
+                $query2 = "SELECT * FROM user";
+                $result2 = mysqli_query($connection,$query2) or dir("Failed.");
+                if(mysqli_num_rows($result2)){
+                    $total_records = mysqli_num_rows($result2);
+                    $total_page = ceil($total_records/$limit);
+
+                    echo "<ul class='pagination admin-pagination'>";
+                    if($page_number > 1){
+                        echo '<li><a href="users.php?page='.($page_number-1).'">prev</a></li>';
+                    }
+
+                    for($i = 1; $i <= $total_page; $i++){
+
+                        if($i == $page_number){
+                          $active = "active";
+                        }else{
+                          $active = "";
+                        }
+
+                        echo '<li class='.$active.'><a href="users.php?page='.$i.'">'.$i.'</a></li>';
+                    }
+                    if($total_page > $page_number){
+                        echo '<li><a href="users.php?page='.($page_number+1).'">next</a></li>';
+                    }
+                        echo "</ul>";
+                }
+            ?>
+
               </div>
           </div>
       </div>
