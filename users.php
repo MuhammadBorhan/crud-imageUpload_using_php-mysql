@@ -48,9 +48,9 @@
                     
                     ?></td>
                   <td class='edit'><a href='update-user.php?id=<?php echo $row['user_id'] ?>'>Edit</a></td>
-                  
-
-                  <td class='delete'><a onclick="return confirm('Are You Sure?')" href='delete-user.php?id=<?php echo $row['user_id'] ?>'>Delete</a></td>
+                  <td class='delete'>
+                    <a onclick="return confirm('Are You Sure?')" href='delete-user.php?id=<?php echo $row['user_id'] ?>'>Delete</a>
+                  </td>
               </tr>
 
         <!-- while loop last backet -->
