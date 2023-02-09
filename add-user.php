@@ -19,6 +19,20 @@
                             $password = mysqli_real_escape_string($connection,md5($_POST['password']));
                             $role = mysqli_real_escape_string($connection,$_POST['role']);
 
+                            $image = $_FILES['image'];
+                            $image_name = $image['name'];
+                            $image_tmp_name = $image['tmp_name'];
+
+                            if(!empty($image)){
+                                $loc="upload/";
+                               if( move_uploaded_file($image_tmp_name,$loc.$image_name)){
+                                header('location: users.php');
+                               }
+                            }else{
+                                echo 'File empty';
+                            }
+
+
                             $selectUser = "SELECT username FROM user WHERE username='$user'";
                             $findUser = mysqli_query($connection,$selectUser) or die("Query faild.");
 
@@ -26,8 +40,8 @@
                             if($count > 0){
                             echo "UserName Already Exists.";
                             }{
-                            $insertUser = "INSERT INTO user (first_name,last_name,username,password,role) 
-                            VALUE ('$fname','$lname','$user','$password','$role')";
+                            $insertUser = "INSERT INTO user (profile,first_name,last_name,username,password,role) 
+                            VALUE ('$image_name','$fname','$lname','$user','$password','$role')";
                             $createUser = mysqli_query($connection,$insertUser) or die("Query Failed.");
 
                             if($createUser){
@@ -39,7 +53,7 @@
                         }
                    ?>
                     <!-- form start -->
-                  <form  action="<?php $_SERVER['PHP_SELF'] ?>" method ="POST" autocomplete="off">
+                  <form  action="<?php $_SERVER['PHP_SELF'] ?>" method ="POST" autocomplete="off" enctype="multipart/form-data">
                       <div class="form-group">
                           <label>First Name</label>
                           <input type="text" name="fname" class="form-control" placeholder="First Name" required>
@@ -52,10 +66,13 @@
                           <label>User Name</label>
                           <input type="text" name="user" class="form-control" placeholder="Username" required>
                       </div>
-
                       <div class="form-group">
                           <label>Password</label>
                           <input type="password" name="password" class="form-control" placeholder="Password" required>
+                      </div>
+                      <div class="form-group">
+                          <label>Image URL</label>
+                          <input type="file" name="image" class="form-control" >
                       </div>
                       <div class="form-group">
                           <label>User Role</label>

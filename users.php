@@ -13,6 +13,7 @@
                   <table class="content-table">
                       <thead>
                           <th>SL No.</th>
+                          <th>Profile</th>
                           <th>Full Name</th>
                           <th>User Name</th>
                           <th>Role</th>
@@ -36,6 +37,7 @@
         ?>
               <tr>
                   <td class='id'><?php echo $serial++; ?></td>
+                  <td><img width="50" src="upload/<?php echo $row['profile'];?>"></td>
                   <td><?php echo $row['first_name']." ".$row['last_name'] ?></td>
                   <td><?php echo $row['username'] ?></td>
                   <td><?php 
