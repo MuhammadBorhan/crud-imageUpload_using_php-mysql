@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>ADMIN Panel</title>
+        <title>CRUD With Image</title>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <!-- Custom stlylesheet -->
@@ -37,4 +37,3 @@
                 </div>
             </div>
         </div>
-        <!-- /Menu Bar -->
